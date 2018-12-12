@@ -1,8 +1,9 @@
-package com.company;
+package main.java;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	Menu game = new Menu();
+	game.runGame();
     }
 }
