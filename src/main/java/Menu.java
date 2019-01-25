@@ -1,13 +1,8 @@
 package main.java;
 
 import java.util.Scanner;
-import java.util.*;
-import java.io.*;
 
 public class Menu {
-
-    Properties prop = new Properties();
-    InputStream input = null;
 
     /**
      * Display all games choices
@@ -31,7 +26,7 @@ public class Menu {
 
             // Si l'entrée clavier n'est pas un byte
             if (!sc.hasNextByte()) {
-                Erreur.erreurChoix();
+                Error.errorChoix();
                 sc.next();
                 continue;
             }
@@ -52,7 +47,7 @@ public class Menu {
                     System.out.println("À bientôt !");
                     break;
                 default:
-                    Erreur.erreurChoix();
+                    Error.errorChoix();
                     System.out.println("Vous n'avez choisi aucun jeu parmi les choix proposés");
                     break;
             }
@@ -60,4 +55,3 @@ public class Menu {
             while (choix != 1 && choix != 2 && choix != 3 && choix != 4) ;
         }
     }
-
