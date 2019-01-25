@@ -33,7 +33,7 @@ public class PlusOuMoins extends MenuMode {
 
         joueur1.proposerNombre();// L'utilisateur entre la combinaison à deviner
         nombreMystere = Joueur.proposition;
-        System.out.println("Le nombre myst�re est " + nombreMystere + ".\n");
+        System.out.println("Le nombre mystère est " + nombreMystere + ".\n");
         do {
 
             afficherCompteur();
