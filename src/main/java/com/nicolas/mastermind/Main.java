@@ -16,8 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        log.error("Je suis dans le main");
-        log.error("Je suis dans le main !!!!!");
+        log.info("Le jeu est lancé !");
 
         Properties prop = new Properties();
         InputStream input = null;
@@ -27,17 +26,20 @@ public class Main {
 
             input = new FileInputStream("config.properties");
 
-            // Chargement du fichier config
+            // Chargement du fichier de configuration
             prop.load(input);
+            log.info("Chargement du fichier config.properties");
         } catch (IOException ex) {
             try {
                 // En cas d'erreur, on créé un nouveau fichier config
                 output = new FileOutputStream("config.properties");
+                log.error("Fichier de configuration non trouvé");
 
                 // Valeurs par défaut
                 prop.setProperty("longueurPlusOuMoins", "5");
                 prop.setProperty("couleurs", "10");
                 prop.setProperty("coupsMax", "15");
+                log.info("Fichier configuration par défaut créé");
                 // Config sauvegardée à la racine du projet
                 prop.store(output, null);
 

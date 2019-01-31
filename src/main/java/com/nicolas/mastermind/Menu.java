@@ -1,8 +1,12 @@
 package com.nicolas.mastermind;
 
 import java.util.Scanner;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Menu {
+
+    private static Logger log = LogManager.getLogger(Main.class.getName());
 
     /**
      * Display all games choices
@@ -11,6 +15,7 @@ public class Menu {
 
         byte choix = 0;
 
+        log.info("Affichage du menu");
         System.out.println("-------------  Bienvenue dans l'application MasterMind !  -------------\n\n");
         System.out.println("Merci de sélectionner le jeu de votre choix. Have fun !\n");
 
@@ -44,8 +49,10 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("À bientôt !");
+                    log.info("Fermeture du jeu");
                     break;
                 default:
+                    Error.errorChoix();
                     System.out.println("Vous n'avez choisi aucun jeu parmi les choix proposés");
                     break;
             }
