@@ -1,4 +1,4 @@
-package main.java;
+package com.nicolas.mastermind;
 
 public abstract class Joueur {
 

@@ -1,4 +1,4 @@
-package main.java;
+package com.nicolas.mastermind;
 
 import java.util.Scanner;
 import java.io.FileInputStream;
@@ -68,7 +68,6 @@ public abstract class MenuMode {
 
             // Si l'entrée clavier n'est pas un byte
             if (!sc.hasNextByte()) {
-                Error.errorChoix();
                 sc.next();
                 continue;
             }
@@ -96,7 +95,6 @@ public abstract class MenuMode {
                     break;
 
                 default:
-                    Error.errorChoix();
                     System.out.println("Vous n'avez choisi aucun mode de jeu parmi les choix proposés");
                     break;
             }

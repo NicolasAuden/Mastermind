@@ -1,4 +1,4 @@
-package main.java;
+package com.nicolas.mastermind;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,10 +7,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Main {
 
+    private static Logger log = LogManager.getLogger(Main.class.getName());
+
     public static void main(String[] args) {
+
+        log.error("Je suis dans le main");
+        log.error("Je suis dans le main !!!!!");
 
         Properties prop = new Properties();
         InputStream input = null;

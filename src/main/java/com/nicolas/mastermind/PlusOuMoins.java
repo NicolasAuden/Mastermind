@@ -1,12 +1,25 @@
-package main.java;
+package com.nicolas.mastermind;
+
+import java.io.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LoggerContext;
+
+import org.apache.logging.log4j.Logger;
 
 public class PlusOuMoins extends MenuMode {
+
+    private Logger logger;
 
     public PlusOuMoins() {
 
         super("\n*****PLUS OU MOINS*****");
+
         longueurNombreMystere = Integer.valueOf(prop.getProperty("longueurPlusOuMoins"));
         coupsMax = Integer.valueOf(prop.getProperty("coupsMax"));
+        LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false); File file = new File("src/main/resources/log4j2.xml");   // this will force a reconfiguration context.setConfigLocation(file.toURI());
+        logger = LogManager.getLogger(Main.class);
+        logger.error("c est une erreur");
     }
 
     public void challenger() {

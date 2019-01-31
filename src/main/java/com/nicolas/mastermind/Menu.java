@@ -1,4 +1,4 @@
-package main.java;
+package com.nicolas.mastermind;
 
 import java.util.Scanner;
 
@@ -26,18 +26,17 @@ public class Menu {
 
             // Si l'entrée clavier n'est pas un byte
             if (!sc.hasNextByte()) {
-                Error.errorChoix();
                 sc.next();
                 continue;
             }
             choix = sc.nextByte();
             switch (choix) {
 
-                /*case 1:
+                case 1:
                     Mastermind mastermind = new Mastermind();// Mastermind
                     choix = 0;
                     System.out.println("Vous avez choisi comme jeu : Mastermind");
-                    break;*/
+                    break;
                 case 2:
                     PlusOuMoins plusOuMoins = new PlusOuMoins();
                     choix = 0;
@@ -47,7 +46,6 @@ public class Menu {
                     System.out.println("À bientôt !");
                     break;
                 default:
-                    Error.errorChoix();
                     System.out.println("Vous n'avez choisi aucun jeu parmi les choix proposés");
                     break;
             }
