@@ -1,10 +1,13 @@
 package com.nicolas.mastermind;
 
+import java.util.ArrayList;
 import java.util.Random;
-
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Machine extends Joueur {
 
+    private static Logger log = LogManager.getLogger(Main.class.getName());
     String tourPrecedent = "";
 
     public void proposerNombre() { // Méthode
@@ -43,5 +46,13 @@ public class Machine extends Joueur {
             tourPrecedent = proposition;
             System.out.println(proposition);
         }
+        log.info("Nombre proposé : "+proposition);
+    }
+
+    public void piocherDansListe(ArrayList liste) { // Méthode utilisée dans Mastermind
+        Random random = new Random();
+        int index = random.nextInt(liste.size());
+        proposition = (String) liste.get(index);
+        log.info("Nombre proposé parmi la liste de solutions : "+proposition);
     }
 }

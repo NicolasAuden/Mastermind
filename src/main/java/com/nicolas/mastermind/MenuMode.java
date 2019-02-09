@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public abstract class MenuMode {
+
+    private static Logger log = LogManager.getLogger(Main.class.getName());
 
     Joueur joueur1;
     Joueur joueur2;
@@ -68,6 +72,7 @@ public abstract class MenuMode {
 
             // Si l'entrée clavier n'est pas un byte
             if (!sc.hasNextByte()) {
+                Error.errorChoix();
                 sc.next();
                 continue;
             }
@@ -93,10 +98,9 @@ public abstract class MenuMode {
                 case 4:
                     System.out.println("Bye!");
                     break;
-
                 default:
                     System.out.println("Vous n'avez choisi aucun mode de jeu parmi les choix proposés");
-                    break;
+
             }
         } while (choix != 1 && choix != 2 && choix != 3 && choix != 4);
     }
@@ -128,6 +132,7 @@ public abstract class MenuMode {
 
             nombreMystere += chiffreNombreMystere[i];
         }
+        log.info("Nombre mystère généré : "+nombreMystere);
     }
 
     // Retourner le nom du jeu sélectionné
@@ -153,9 +158,11 @@ public abstract class MenuMode {
                 resultat += "=";
         }
         System.out.println("Résultat : " + resultat + "\n\n--------\n");
+        log.info("Nombres comparés, résultat : "+resultat);
     }
 
     public void finPartie(String vainqueur) {
+        log.info("Partie terminée");
         if (compteur >= coupsMax && !Joueur.proposition.equals(nombreMystere))
             System.out.println(
                     "Vous avez atteint la limite de coups (" + coupsMax + ") ! Le nombre mystère était : " + nombreMystere + ".");
@@ -164,11 +171,20 @@ public abstract class MenuMode {
     }
 
     public void initCompteur() {
+        log.info("Compteur d'essais initialisé");
         compteur = 1;
     }
 
     public void afficherCompteur() {
+        log.info("Affichage du compteur d'essais (essai n°"+compteur+")");
         System.out.println("Coup n°" + (compteur));
+    }
+
+    public void devMode() {
+        if (Main.modDev == 1)
+        {
+            System.out.println("[Mode développeur] Le nombre mystère est : "+nombreMystere);
+        }
     }
 
 }

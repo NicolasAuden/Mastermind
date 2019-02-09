@@ -13,6 +13,8 @@ import org.apache.logging.log4j.LogManager;
 public class Main {
 
     private static Logger log = LogManager.getLogger(Main.class.getName());
+    public static int modDev;
+    public static boolean argument;
 
     public static void main(String[] args) {
 
@@ -36,9 +38,11 @@ public class Main {
                 log.error("Fichier de configuration non trouvé");
 
                 // Valeurs par défaut
-                prop.setProperty("longueurPlusOuMoins", "5");
+                prop.setProperty("longueurPlusOuMoins", "2");
+                prop.setProperty("longueurMastermind", "2");
                 prop.setProperty("couleurs", "10");
                 prop.setProperty("coupsMax", "15");
+                prop.setProperty("modeDeveloppeur", "0");
                 log.info("Fichier configuration par défaut créé");
                 // Config sauvegardée à la racine du projet
                 prop.store(output, null);
@@ -63,6 +67,11 @@ public class Main {
                 }
             }
         }
+
+        if (args.length > 0)
+            modDev = Integer.parseInt(args[0]);
+        else
+            modDev = Integer.valueOf(prop.getProperty("modeDeveloppeur"));
 
         // On lance le menu pour choisir le jeu
         Menu menu = new Menu();
