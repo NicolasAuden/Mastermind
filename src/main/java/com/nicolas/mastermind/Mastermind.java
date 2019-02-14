@@ -31,7 +31,7 @@ public class Mastermind extends MenuMode {
         genererNombreMystere();
         joueur1 = new Humain();
         log.info("Joueur 1 défini comme humain");
-        // On boucle tant que le nombre myst�re n'est pas trouv�
+        // On boucle tant que le nombre mystère n'est pas trouvé
         do {
             devMode();
             resetIndices();
@@ -42,6 +42,35 @@ public class Mastermind extends MenuMode {
             compteur++;
         } while (bienPlaces < nombreMystere.length()&& compteur < coupsMax + 1);
         finPartie("Vous avez");
+    }
+
+    public void defenseur() {
+        log.info("Mode défenseur lancé");
+        System.out.println("********MODE DEFENSEUR********");
+        this.initCompteur();
+        this.genererListeSolutions();
+        this.joueur1 = new Humain();
+        log.info("Joueur 1 défini comme humain");
+        this.joueur2 = new Machine();
+        log.info("Joueur 2 défini comme ordinateur");
+        this.joueur1.proposerNombre();
+        nombreMystere = Joueur.proposition;
+        System.out.println("Le nombre mystère est " + nombreMystere);
+
+        do {
+            this.devMode();
+            this.resetIndices();
+            this.afficherCompteur();
+            this.joueur2.piocherDansListe(this.aListe);
+            System.out.println(Joueur.proposition);
+            this.comparerNombres(this.joueur2);
+            this.afficherResultat();
+            this.enregistrerResultat();
+            this.clean();
+            ++compteur;
+        } while(this.resultatOK < nombreMystere.length() && compteur < coupsMax + 1);
+
+        this.finPartie("L'ordinateur a");
     }
 
 
@@ -77,17 +106,31 @@ public class Mastermind extends MenuMode {
     public void comparerNombres(Joueur joueur) {
 
         String sProposition = String.valueOf(joueur.proposition);// On met la valeur de proposition dans un String
+        String nombreMystereMalPlace = "";
+        String propositionMalPlace = "";
 
         for (int i = 0; i < longueurNombreMystere; i++) {
-            int chiffrePropose = Character.getNumericValue(sProposition.charAt(i));
-            int chiffreNombreMystere = Character.getNumericValue(nombreMystere.charAt(i));
+            Integer chiffrePropose = Character.getNumericValue(sProposition.charAt(i));
+            Integer chiffreNombreMystere = Character.getNumericValue(nombreMystere.charAt(i));
 
             if (chiffrePropose == chiffreNombreMystere)
                 bienPlaces++;
-            else if (nombreMystere.contains(String.valueOf(chiffrePropose)))
+            //else if (nombreMystere.contains(String.valueOf(chiffrePropose)))
+              //  presents++;
+            else {
+                if (!nombreMystereMalPlace.contains(chiffreNombreMystere.toString())) {
+                    nombreMystereMalPlace += chiffreNombreMystere;
+                }
+                propositionMalPlace += chiffrePropose;
+            }
+        }
+
+        for (int i = 0; i < nombreMystereMalPlace.length(); i++) {
+            Character chiffrePropose = propositionMalPlace.charAt(i);
+
+            if (nombreMystereMalPlace.contains(chiffrePropose.toString())) {
                 presents++;
-            else
-                ;
+            }
         }
         log.info("Comparaison de la proposition de "+joueur+" ("+joueur.proposition+") avec le nombre mystère ("+nombreMystere+")");
     }
