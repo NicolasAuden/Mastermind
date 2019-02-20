@@ -1,6 +1,9 @@
 package com.nicolas.mastermind;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -71,6 +74,56 @@ public class Mastermind extends MenuMode {
         } while(this.resultatOK < nombreMystere.length() && compteur < coupsMax + 1);
 
         this.finPartie("L'ordinateur a");
+    }
+
+    public void duel() {
+        log.info("Mode duel lancé");
+        System.out.println("********MODE DUEL********");
+        this.initCompteur();
+        this.genererListeSolutions();
+        this.genererNombreMystere();
+        String combinaisonJoueur1 = nombreMystere;
+        this.joueur1 = new Humain();
+        log.info("Joueur 1 défini comme humain");
+        this.joueur1.proposerNombre();
+        String combinaisonJoueur2 = Joueur.proposition;
+        this.joueur2 = new Machine();
+        log.info("Joueur 2 défini comme ordinateur");
+
+        do {
+            this.resetIndices();
+            nombreMystere = combinaisonJoueur1;
+            this.devMode();
+            System.out.println("À vous :");
+            this.afficherCompteur();
+            this.joueur1.proposerNombre();
+            this.comparerNombres(this.joueur1);
+            this.afficherResultat();
+            if (String.valueOf(Joueur.proposition).equals(nombreMystere)) {
+                ++compteur;
+                break;
+            }
+
+            nombreMystere = combinaisonJoueur2;
+            this.devMode();
+            System.out.println("À l'ordinateur :");
+            this.resetIndices();
+            this.afficherCompteur();
+            this.joueur2.piocherDansListe(this.aListe);
+            System.out.println(Joueur.proposition);
+            this.comparerNombres(this.joueur2);
+            this.afficherResultat();
+            this.enregistrerResultat();
+            this.clean();
+            ++compteur;
+        } while(!String.valueOf(Joueur.proposition).equals(nombreMystere) && compteur < coupsMax + 1);
+
+        if (nombreMystere == combinaisonJoueur1) {
+            this.finPartie("Vous avez");
+        } else if (nombreMystere == combinaisonJoueur2) {
+            this.finPartie("L'ordinateur a");
+        }
+
     }
 
 
