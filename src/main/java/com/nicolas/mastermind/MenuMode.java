@@ -13,8 +13,8 @@ public abstract class MenuMode {
 
     private static Logger log = LogManager.getLogger(Main.class.getName());
 
-    Joueur joueur1;
-    Joueur joueur2;
+    Joueur humain;
+    Joueur machine;
     String nomDuJeu;
     static String resultat;
     static int longueurNombreMystere;

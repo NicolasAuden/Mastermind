@@ -32,15 +32,15 @@ public class Mastermind extends MenuMode {
         initCompteur();
         genererListeSolutions();
         genererNombreMystere();
-        joueur1 = new Humain();
+        humain = new Humain();
         log.info("Joueur 1 défini comme humain");
         // On boucle tant que le nombre mystère n'est pas trouvé
         do {
             devMode();
             resetIndices();
             afficherCompteur();
-            joueur1.proposerNombre();
-            comparerNombres(joueur1);
+            humain.proposerNombre();
+            comparerNombres(humain);
             afficherResultat();
             compteur++;
         } while (bienPlaces < nombreMystere.length()&& compteur < coupsMax + 1);
@@ -52,11 +52,11 @@ public class Mastermind extends MenuMode {
         System.out.println("********MODE DEFENSEUR********");
         this.initCompteur();
         this.genererListeSolutions();
-        this.joueur1 = new Humain();
+        this.humain = new Humain();
         log.info("Joueur 1 défini comme humain");
-        this.joueur2 = new Machine();
+        this.machine = new Machine();
         log.info("Joueur 2 défini comme ordinateur");
-        this.joueur1.proposerNombre();
+        this.humain.proposerNombre();
         nombreMystere = Joueur.proposition;
         System.out.println("Le nombre mystère est " + nombreMystere);
 
@@ -64,9 +64,9 @@ public class Mastermind extends MenuMode {
             this.devMode();
             this.resetIndices();
             this.afficherCompteur();
-            this.joueur2.piocherDansListe(this.aListe);
+            this.machine.piocherDansListe(this.aListe);
             System.out.println(Joueur.proposition);
-            this.comparerNombres(this.joueur2);
+            this.comparerNombres(this.machine);
             this.afficherResultat();
             this.enregistrerResultat();
             this.clean();
@@ -82,45 +82,45 @@ public class Mastermind extends MenuMode {
         this.initCompteur();
         this.genererListeSolutions();
         this.genererNombreMystere();
-        String combinaisonJoueur1 = nombreMystere;
-        this.joueur1 = new Humain();
+        String combinaisonhumain = nombreMystere;
+        this.humain = new Humain();
         log.info("Joueur 1 défini comme humain");
-        this.joueur1.proposerNombre();
-        String combinaisonJoueur2 = Joueur.proposition;
-        this.joueur2 = new Machine();
+        this.humain.proposerNombre();
+        String combinaisonmachine = Joueur.proposition;
+        this.machine = new Machine();
         log.info("Joueur 2 défini comme ordinateur");
 
         do {
             this.resetIndices();
-            nombreMystere = combinaisonJoueur1;
+            nombreMystere = combinaisonhumain;
             this.devMode();
             System.out.println("À vous :");
             this.afficherCompteur();
-            this.joueur1.proposerNombre();
-            this.comparerNombres(this.joueur1);
+            this.humain.proposerNombre();
+            this.comparerNombres(this.humain);
             this.afficherResultat();
             if (String.valueOf(Joueur.proposition).equals(nombreMystere)) {
                 ++compteur;
                 break;
             }
 
-            nombreMystere = combinaisonJoueur2;
+            nombreMystere = combinaisonmachine;
             this.devMode();
             System.out.println("À l'ordinateur :");
             this.resetIndices();
             this.afficherCompteur();
-            this.joueur2.piocherDansListe(this.aListe);
+            this.machine.piocherDansListe(this.aListe);
             System.out.println(Joueur.proposition);
-            this.comparerNombres(this.joueur2);
+            this.comparerNombres(this.machine);
             this.afficherResultat();
             this.enregistrerResultat();
             this.clean();
             ++compteur;
         } while(!String.valueOf(Joueur.proposition).equals(nombreMystere) && compteur < coupsMax + 1);
 
-        if (nombreMystere == combinaisonJoueur1) {
+        if (nombreMystere == combinaisonhumain) {
             this.finPartie("Vous avez");
-        } else if (nombreMystere == combinaisonJoueur2) {
+        } else if (nombreMystere == combinaisonmachine) {
             this.finPartie("L'ordinateur a");
         }
 
@@ -195,10 +195,10 @@ public class Mastermind extends MenuMode {
             presents = 0;
         if (bienPlaces == nombreMystere.length())
             presents = 0;
-        System.out.println(presents + " présents et " + bienPlaces + " bien placé.\n\n--------\n");
-        log.info(presents + " présents et " +bienPlaces+ " bien placés");
-        if (bienPlaces == nombreMystere.length() && bienPlaces > 1)
-            System.out.println(presents + " présents et " + bienPlaces + " bien placés.\n\n--------\n");
+        System.out.println(presents + " présent(s) et " + bienPlaces + " bien placé(s).\n\n--------\n");
+        log.info(presents + " présent(s) et " +bienPlaces+ " bien placé(s)");
+        //if (bienPlaces == nombreMystere.length() && bienPlaces > 1)
+          //  System.out.println(presents + " présents et " + bienPlaces + " bien placés.\n\n--------\n");
 
     }
 
