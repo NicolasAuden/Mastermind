@@ -1,11 +1,12 @@
-# Matermind
-Projet du jeu Mastermind et d'un jeu de réflexion +/-
+# Mastermind
 
+Projet du jeu Mastermind et d'un jeu de réflexion +/-
+Développé sur IntellIj
 
 ### Règles des jeux :
 
 # Mastermind
-Le but : découvrir la combinaison à x chiffres/couleurs de l'adversaire (le défenseur). Pour ce faire, l'attaquant fait une proposition. Le défenseur indique pour chaque proposition le nombre de chiffre de la proposition qui apparaissent à la bonne place et à la mauvaise place dans la combinaison secrète.
+Le but : découvrir la combinaison à x chiffres de l'adversaire (le défenseur). Pour ce faire, l'attaquant fait une proposition. Le défenseur indique pour chaque proposition le nombre de chiffre de la proposition qui apparaissent à la bonne place et à la mauvaise place dans la combinaison secrète.
 
 L'attaquant doit deviner la combinaison secrète en un nombre limité d'essais.
 
@@ -32,7 +33,7 @@ Dans ce mode de jeu, l'ordinateur et vous jouez tour à tour, après avoir l'un 
 
 ### Compilation du programme :
 
-La compilation de l'application se réalise à partir le la classe Main située dans les dossiers src/main/java.
+La compilation de l'application se réalise à partir de la classe Main située dans les dossiers src/main/java.
 
 
 ### Configuration du jeu :
